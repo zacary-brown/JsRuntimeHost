@@ -1,5 +1,4 @@
 #include "AbortController.h"
-#include <cassert>
 
 
 namespace Babylon::Polyfills::Internal
@@ -56,6 +55,5 @@ namespace Babylon::Polyfills::AbortController
     void Initialize(Napi::Env env)
     {
         Internal::AbortController::Initialize(env);
-        Internal::AbortSignal::Initialize(env);
     }
 }
