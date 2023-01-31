@@ -39,11 +39,14 @@ namespace Babylon::Polyfills::Internal
         namespace MethodType
         {
             constexpr const char* Get = "GET";
+            constexpr const char* Post = "POST";
 
             UrlLib::UrlMethod StringToEnum(const std::string& value)
             {
                 if (value == Get)
                     return UrlLib::UrlMethod::Get;
+                else if (value == Post)
+                    return UrlLib::UrlMethod::Post;
 
                 throw std::runtime_error{"Unsupported url method: " + value};
             }
@@ -77,12 +80,16 @@ namespace Babylon::Polyfills::Internal
                 InstanceAccessor("responseType", &XMLHttpRequest::GetResponseType, &XMLHttpRequest::SetResponseType),
                 InstanceAccessor("responseURL", &XMLHttpRequest::GetResponseURL, nullptr),
                 InstanceAccessor("status", &XMLHttpRequest::GetStatus, nullptr),
+                InstanceAccessor("ok", &XMLHttpRequest::Ok, nullptr),
+                InstanceAccessor("headers", &XMLHttpRequest::GetAllResponseHeaders, nullptr),
                 InstanceMethod("getResponseHeader", &XMLHttpRequest::GetResponseHeader),
                 InstanceMethod("addEventListener", &XMLHttpRequest::AddEventListener),
                 InstanceMethod("removeEventListener", &XMLHttpRequest::RemoveEventListener),
                 InstanceMethod("abort", &XMLHttpRequest::Abort),
                 InstanceMethod("open", &XMLHttpRequest::Open),
                 InstanceMethod("send", &XMLHttpRequest::Send),
+                InstanceMethod("setRequestHeader", &XMLHttpRequest::SetRequestHeader),
+                InstanceMethod("json", &XMLHttpRequest::Json),
             });
 
         if (env.Global().Get(JS_XML_HTTP_REQUEST_CONSTRUCTOR_NAME).IsUndefined())
