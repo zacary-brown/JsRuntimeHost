@@ -1,6 +1,7 @@
 #include "AbortController.h"
 #include <cassert>
 
+
 namespace Babylon::Polyfills::Internal
 {
     void AbortController::Initialize(Napi::Env env)
@@ -16,7 +17,12 @@ namespace Babylon::Polyfills::Internal
                     InstanceMethod("abort", &AbortController::Abort),
                 });
 
+        if (env.Global().Get(JS_ABORT_CONTROLLER_CONSTRUCTOR_NAME).IsUndefined())
+        {
             env.Global().Set(JS_ABORT_CONTROLLER_CONSTRUCTOR_NAME, func);
+        }
+
+        JsRuntime::NativeObject::GetFromJavaScript(env).Set(JS_ABORT_CONTROLLER_CONSTRUCTOR_NAME, func);
         }
     }
 
@@ -27,16 +33,21 @@ namespace Babylon::Polyfills::Internal
 
     void AbortController::Abort(const Napi::CallbackInfo&)
     {
-        AbortSignal* sig = AbortSignal::Unwrap(m_signal.Value());
-        
-        assert(sig != nullptr);
-        sig->Abort();
+        m_signal.Set("aborted", true);
+
+        m_runtimeScheduler([this]() 
+        { 
+            m_signal.Get("onabort").As<Napi::Function>().Call({});
+        });
     }
 
     AbortController::AbortController(const Napi::CallbackInfo& info)
         : Napi::ObjectWrap<AbortController>{info}
+        , m_runtimeScheduler{JsRuntime::GetFromJavaScript(info.Env())}
     {
         m_signal = Napi::Persistent(info.Env().Global().Get(AbortSignal::JS_ABORT_SIGNAL_CONSTRUCTOR_NAME).As<Napi::Function>().New({}));
+    
+        m_signal.Set("onabort", Env().Null());
     }
 }
 

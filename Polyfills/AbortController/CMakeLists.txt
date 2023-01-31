@@ -1,4 +1,4 @@
-set(SOURCES 
+    ${SOURCES}
     "Include/Babylon/Polyfills/AbortController.h"
     "Source/AbortController.cpp"
     "Source/AbortController.h"
@@ -11,7 +11,8 @@ add_library(AbortController ${SOURCES})
 target_include_directories(AbortController PUBLIC "Include")
 
 target_link_libraries(AbortController
-    PUBLIC JsRuntime)
+    PUBLIC JsRuntime
+    PRIVATE arcana)
 
 set_property(TARGET AbortController PROPERTY FOLDER Polyfills)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
