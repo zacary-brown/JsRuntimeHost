@@ -1,7 +1,13 @@
 #include <Babylon/AppRuntime.h>
 #include <Babylon/ScriptLoader.h>
+#include <Babylon/Polyfills/AbortController.h>
+#include <Babylon/Polyfills/AbortSignal.h>
 #include <Babylon/Polyfills/Console.h>
+#include <Babylon/Polyfills/Crypto.h>
+#include <Babylon/Polyfills/Performance.h>
 #include <Babylon/Polyfills/Scheduling.h>
+#include <Babylon/Polyfills/URL.h>
+#include <Babylon/Polyfills/URLSearchParams.h>
 #include <Babylon/Polyfills/XMLHttpRequest.h>
 #include <future>
 
@@ -12,6 +18,12 @@ int main()
     std::unique_ptr<Babylon::AppRuntime> runtime = std::make_unique<Babylon::AppRuntime>();
     runtime->Dispatch([&exitCode](Napi::Env env)
     {
+        Babylon::Polyfills::AbortController::Initialize(env);
+        Babylon::Polyfills::AbortSignal::Initialize(env);
+        Babylon::Polyfills::Crypto::Initialize(env);
+        Babylon::Polyfills::Performance::Initialize(env);
+        Babylon::Polyfills::URL::Initialize(env);
+        Babylon::Polyfills::URLSearchParams::Initialize(env);
         Babylon::Polyfills::XMLHttpRequest::Initialize(env);
         Babylon::Polyfills::Console::Initialize(env, [](const char* message, auto)
         {

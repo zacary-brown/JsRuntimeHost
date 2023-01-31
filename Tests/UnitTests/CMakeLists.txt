@@ -20,11 +20,17 @@ endif()
 add_executable(UnitTests ${SOURCES} ${SCRIPTS} ${EXTERNAL_SCRIPTS})
 
 target_link_libraries(UnitTests
+    AbortController
+    AbortSignal
     AppRuntime
     Console
+    Crypto
+    Performance
     Scheduling
     ScriptLoader
+    URL
     UrlLib
+    URLSearchParams
     XMLHttpRequest
     ${ADDITIONAL_LIBRARIES})
 
