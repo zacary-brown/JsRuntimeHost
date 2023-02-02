@@ -52,6 +52,7 @@ target_link_libraries(UnitTests
     PRIVATE URL
     PRIVATE UrlLib
     PRIVATE URLSearchParams
+    PRIVATE WebSocket
     PRIVATE XMLHttpRequest
     ${ADDITIONAL_LIBRARIES})
 

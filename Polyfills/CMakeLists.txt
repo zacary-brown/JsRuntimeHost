@@ -30,6 +30,10 @@ if(JSRUNTIMEHOST_POLYFILL_URLSEARCHPARAMS)
     add_subdirectory(URLSearchParams)
 endif()
 
+if(JSRUNTIMEHOST_POLYFILL_WEBSOCKET)
+    add_subdirectory(WebSocket)
+endif()
+
 if(JSRUNTIMEHOST_POLYFILL_XMLHTTPREQUEST)
     add_subdirectory(XMLHttpRequest)
 endif()

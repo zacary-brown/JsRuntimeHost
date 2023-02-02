@@ -44,6 +44,7 @@ option(JSRUNTIMEHOST_POLYFILL_PERFORMANCE "Include Babylon Native Polyfill Perfo
 option(JSRUNTIMEHOST_POLYFILL_SCHEDULING "Include Babylon Native Polyfill Scheduling." ON)
 option(JSRUNTIMEHOST_POLYFILL_URL "Include Babylon Native Polyfill URL." ON)
 option(JSRUNTIMEHOST_POLYFILL_URLSEARCHPARAMS "Include Babylon Native Polyfill UrlSearchParams." ON)
+option(JSRUNTIMEHOST_POLYFILL_WEBSOCKET "Include Babylon Native Polyfill WebSocket." ON)
 option(JSRUNTIMEHOST_POLYFILL_XMLHTTPREQUEST "Include Babylon Native Polyfill XMLHttpRequest." ON)
 
 ## Tests
