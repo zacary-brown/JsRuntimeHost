@@ -31,6 +31,7 @@ target_link_libraries(UnitTests
     URL
     UrlLib
     URLSearchParams
+    WebSocket
     XMLHttpRequest
     ${ADDITIONAL_LIBRARIES})
 

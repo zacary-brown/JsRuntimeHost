@@ -8,6 +8,7 @@
 #include <Babylon/Polyfills/Scheduling.h>
 #include <Babylon/Polyfills/URL.h>
 #include <Babylon/Polyfills/URLSearchParams.h>
+#include <Babylon/Polyfills/WebSocket.h>
 #include <Babylon/Polyfills/XMLHttpRequest.h>
 #include <future>
 
@@ -25,6 +26,7 @@ int main()
         Babylon::Polyfills::URL::Initialize(env);
         Babylon::Polyfills::URLSearchParams::Initialize(env);
         Babylon::Polyfills::XMLHttpRequest::Initialize(env);
+        Babylon::Polyfills::WebSocket::Initialize(env);
         Babylon::Polyfills::Console::Initialize(env, [](const char* message, auto)
         {
             printf("%s", message);
