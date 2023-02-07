@@ -570,6 +570,44 @@ describe("AbortController / AbortSignal", function () {
     })
 })
 
+// WebSocket
+describe("WebSocket", function () {
+    let ws;
+
+    // Successfully connect to echo
+    ws = new WebSocket('wss://ws.postman-echo.com/raw');
+
+    ws.onopen = () => {
+        expect(ws).to.have.property('readyState', 1);
+        ws.send("Test Message");
+    }
+
+    ws.onclose = () => {
+        expect(ws).to.have.property('readyState', 3);
+
+        // Calling Send while closing triggers .onerror()
+        ws.send("throw");
+    }
+
+    ws.onmessage = (msg) => {
+        expect(msg.data).to.equal("Test Message");
+
+        ws.close();
+    }
+
+    ws.onerror = (err) => {
+        expect(err).to.have.property('data', 'WebSocket is not Open');
+    }
+
+    // Not expected to be open yet
+    expect(ws).to.have.property('readyState', 0);
+
+    it("should successfully store url and protocol", function () {
+        expect(ws).to.have.property('url', 'wss://ws.postman-echo.com/raw');
+        expect(ws).to.have.property('protocol', '');
+    })
+})
+
 mocha.run(failures => {
     // Test program will wait for code to be set before exiting
     if (failures > 0) {
