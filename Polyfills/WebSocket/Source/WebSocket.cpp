@@ -21,7 +21,7 @@ void WebSocket::Initialize(Napi::Env env)
                 StaticValue("CLOSING", Napi::Value::From(env, 2)),
                 StaticValue("CLOSED", Napi::Value::From(env, 3)),
                 InstanceAccessor("readyState", &WebSocket::GetReadyState, nullptr),
-                InstanceAccessor("URL", &WebSocket::GetURL, nullptr),
+                InstanceAccessor("url", &WebSocket::GetURL, nullptr),
                 InstanceAccessor("onopen", nullptr, &WebSocket::SetOnOpen),
                 InstanceAccessor("onclose", nullptr, &WebSocket::SetOnClose),
                 InstanceAccessor("onmessage", nullptr, &WebSocket::SetOnMessage),
