@@ -12,15 +12,19 @@ polyfills that consumers can include if required.
 
 **Required Tools:** [git](https://git-scm.com/), [CMake](https://cmake.org/), [node.js](https://nodejs.org/en/)
 
-The first step for all development environments and targets is to clone this repository. 
+The first step for all development environments and targets is to clone the `JSRuntimeHost` and the `UrlLib` repos. The `JSRuntimeHost` repo contains all the polyfills and the javascript engines, while the `UrlLib` repo contains platform specific code for the polyfills. 
 
-Use a git-enabled terminal to run the following command.
+Use a
+git-enabled terminal to follow the steps below. The `--recursive` flag is necessary as
+Babylon Native makes extensive use of submodules for dependencies.
 
 ```
-git clone https://github.com/BabylonJS/JsRuntimeHost.git
+git clone --recursive https://github.com/zacary-brown/JsRuntimeHost.git
+git clone --recursive https://github.com/zacary-brown/UrlLib.git
 ```
 
-The unit tests require some NPM packages. From the root of the repository on the command line, run the following commands:
+Babylon Native requires Babylon.js. You will need to install NPM packages to resolve these dependencies. From the root of the `JsRuntimeHost` 
+repository on the command line, run the following commands:
 
 ```
 cd Tests
@@ -40,21 +44,30 @@ Only building with Android Studio is supported. CMake is not used directly. Inst
 is used for building and CMake is automatically invocated for building the native part.
 An `.apk` that can be executed on your device or simulator is the output.
 
+
 First, download the latest release of Ninja, extract the binary, and add it to your system path.
 
-Once you have Android Studio downloaded, you need to set up an Android emulator if you do not have a physical Android device. You can do this by selecting `Tools` -> `Device Manager` and then selecting a device. (We are using Pixel 2 API 27). 
+
+Babylon Native on Android supports two JavaScript engines: V8 and JavaScriptCore. V8 is
+used by default if no engine is specified. To change the engine to JavaScriptCore, open
+the file `Apps\Playground\Android\gradle.properties` and add the following line:
+
+```
+JSEngine=jsc
+```
+
+Once you have Android Studio downloaded you need to set up an Android emulator if you do not have a physical Android device. You can do this by selecting `Tools` -> `Device Manager` and then selecting a device. (We are using Pixel 2 API 27). 
 
 Open the project located at
 `JsRuntimeHost\Tests\UnitTests\Android` with Android Studio. Note that this can take a while to load. (The bottom right corner of the Android Studio window shows you what is currently being loaded.) 
 
-Then in the LEFT PANE, right click on `app`, and select `Run 'All Tests'`, as displayed in the image below.
 
-![Run All Tests](./Documentation/Images/android_build.png)
-
-If you don't have an Android device plugged in or no Android image in the Android emulator, that option will be greyed and inaccessible. 
+Then in the menu, select `Run` -> `Run 'All Tests'`. If you don't have an Android device plugged in or no Android image in the Android emulator,
+that option will be greyed and inaccessible. 
 
 **Troubleshooting:**
-If the `app\cpp` folder on the left navigation pane is empty, select `File` -> `Sync Project with Gradle Files` and try to re-run the project by selecting `Run` -> `Run 'All Tests'`.
+If the `app/cpp` folder on the left navigation pane is empty, select `File` -> `Sync project with gradle files` and try to re-run the project by selecting  `Run` -> `Run 'All Tests'`.
+
 
 ## Contributing
 
