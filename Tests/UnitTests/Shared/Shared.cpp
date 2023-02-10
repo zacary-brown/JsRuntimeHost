@@ -1,7 +1,14 @@
 #include "Shared.h"
 #include <Babylon/AppRuntime.h>
 #include <Babylon/ScriptLoader.h>
+#include <Babylon/Polyfills/AbortController.h>
+#include <Babylon/Polyfills/AbortSignal.h>
+#include <Babylon/Polyfills/Crypto.h>
+#include <Babylon/Polyfills/Performance.h>
 #include <Babylon/Polyfills/Scheduling.h>
+#include <Babylon/Polyfills/URL.h>
+#include <Babylon/Polyfills/URLSearchParams.h>
+#include <Babylon/Polyfills/WebSocket.h>
 #include <Babylon/Polyfills/XMLHttpRequest.h>
 #include <Babylon/Polyfills/URL.h>
 #include <Babylon/Polyfills/AbortController.h>
@@ -32,11 +39,17 @@ int RunTests(Babylon::Polyfills::Console::CallbackT consoleCallback)
 
     runtime.Dispatch([&exitCode, consoleCallback = std::move(consoleCallback)](Napi::Env env) mutable
     {
-        Babylon::Polyfills::XMLHttpRequest::Initialize(env);
+        Babylon::Polyfills::AbortController::Initialize(env);
+        Babylon::Polyfills::AbortSignal::Initialize(env);
         Babylon::Polyfills::Console::Initialize(env, std::move(consoleCallback));
+        Babylon::Polyfills::Crypto::Initialize(env);
+        Babylon::Polyfills::Performance::Initialize(env);
         Babylon::Polyfills::Scheduling::Initialize(env);
         Babylon::Polyfills::URL::Initialize(env);
         Babylon::Polyfills::AbortController::Initialize(env);
+        Babylon::Polyfills::URLSearchParams::Initialize(env);
+        Babylon::Polyfills::WebSocket::Initialize(env);
+        Babylon::Polyfills::XMLHttpRequest::Initialize(env);
 
         env.Global().Set("SetExitCode", Napi::Function::New(env, [&exitCode](const Napi::CallbackInfo& info)
         {
@@ -51,6 +64,7 @@ int RunTests(Babylon::Polyfills::Console::CallbackT consoleCallback)
     loader.LoadScript("app:///Scripts/chai.js");
     loader.LoadScript("app:///Scripts/mocha.js");
     loader.LoadScript("app:///Scripts/tests.js");
+    //loader.LoadScript("app:///Scripts/main_bundle_poly.js");
 
     return exitCode.get_future().get();
 }
