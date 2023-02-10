@@ -24,9 +24,14 @@ target_link_libraries(UnitTestsJNI
     PRIVATE AndroidExtensions
     PRIVATE AppRuntime
     PRIVATE AbortController
+    PRIVATE AbortSignal
     PRIVATE Console
+    PRIVATE Crypto
+    PRIVATE Performance
     PRIVATE Scheduling
     PRIVATE ScriptLoader
     PRIVATE URL
     PRIVATE UrlLib
+    PRIVATE URLSearchParams
+    PRIVATE WebSocket
     PRIVATE XMLHttpRequest)
