@@ -24,18 +24,15 @@ namespace Babylon::Polyfills::Internal
         }
 
         JsRuntime::NativeObject::GetFromJavaScript(env).Set(JS_CRYPTO_CONSTRUCTOR_NAME, myCrypto);
+
+        // Seed RNG
+        std::srand(static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count()));
     }
     
     uint8_t GetRandomValue() {
-        unsigned int number;
-        errno_t err;
-        err = rand_s(&number);
-        if (err != 0)
-        {
-            printf_s("The rand_s function failed!\n");
-        }
-        return (uint8_t)((double)number / ((double) UINT_MAX + 1) * 256.0);
-
+        unsigned int number = std::rand();
+        
+        return (uint8_t)(number % 256);
     }
 
     Napi::Value Crypto::GetRandomValues(const Napi::CallbackInfo& info)
@@ -43,7 +40,7 @@ namespace Babylon::Polyfills::Internal
         auto env{info.Env()};
         auto myBuf = Napi::Uint8Array::New(env, 16);
 
-        for (int i = 0; i <= 16; i++)
+        for (size_t i = 0; i < 16; ++i)
         {
             myBuf[i] = GetRandomValue();
         }

@@ -5,6 +5,8 @@
 #include <napi/napi.h>
 #include <../../Performance/Source/Performance.h>
 
+#include <unordered_map>
+
 namespace Babylon::Polyfills::Internal
 {
     class Performance final : public Napi::ObjectWrap<Performance>

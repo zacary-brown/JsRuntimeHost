@@ -108,7 +108,7 @@ namespace Babylon::Polyfills::Internal
         m_href = info[0].As<Napi::String>();
 
         // Get Position of ? to store search var
-        const size_t qIndex = m_href.find_last_of("?");
+        const size_t qIndex = m_href.find_last_of('?');
         
         if (qIndex != std::string::npos)
             m_search = m_href.substr(qIndex, m_href.size() - qIndex);

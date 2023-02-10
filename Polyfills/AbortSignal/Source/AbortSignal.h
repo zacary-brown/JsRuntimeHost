@@ -4,6 +4,8 @@
 
 #include <napi/napi.h>
 
+#include <unordered_map>
+
 class AbortController;
 
 namespace Babylon::Polyfills::Internal
