@@ -48,26 +48,19 @@ An `.apk` that can be executed on your device or simulator is the output.
 
 First, download the latest release of Ninja, extract the binary, and add it to your system path.
 
-
-Babylon Native on Android supports two JavaScript engines: V8 and JavaScriptCore. V8 is
-used by default if no engine is specified. To change the engine to JavaScriptCore, open
-the file `Apps\Playground\Android\gradle.properties` and add the following line:
-
-```
-JSEngine=jsc
-```
-
-Once you have Android Studio downloaded you need to set up an Android emulator if you do not have a physical Android device. You can do this by selecting `Tools` -> `Device Manager` and then selecting a device. (We are using Pixel 2 API 27). 
+Once you have Android Studio downloaded, open it in Administrator Mode. Then, you need to set up an Android emulator if you do not have a physical Android device. You can do this by selecting `Tools` -> `Device Manager` and then selecting a device. (We are using Pixel 2 API 27). 
 
 Open the project located at
-`JsRuntimeHost\Tests\UnitTests\Android` with Android Studio. Note that this can take a while to load. (The bottom right corner of the Android Studio window shows you what is currently being loaded.) 
+`JsRuntimeHost\Tests\UnitTests\Android` with Android Studio (make sure Android Studio is in admin mode). Note that this can take a while to load. (The bottom right corner of the Android Studio window shows you what is currently being loaded.) 
 
 
-Then in the menu, select `Run` -> `Run 'All Tests'`. If you don't have an Android device plugged in or no Android image in the Android emulator,
+Then in the LEFT PANE, right click on `app`, and select `Run 'All Tests'`. If you don't have an Android device plugged in or no Android image in the Android emulator,
 that option will be greyed and inaccessible. 
 
 **Troubleshooting:**
 If the `app/cpp` folder on the left navigation pane is empty, select `File` -> `Sync project with gradle files` and try to re-run the project by selecting  `Run` -> `Run 'All Tests'`.
+
+Sometimes, you may need to clean the build. To do that, delete the `Debug` folder located at `JsRuntimeHost\Build\Android\Debug`.
 
 ## Pulling your UrlLib branch from CMake
 
