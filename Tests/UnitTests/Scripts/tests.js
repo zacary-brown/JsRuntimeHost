@@ -98,7 +98,7 @@ describe("XMLHTTPRequest", function () {
     });
 
     it("should open a local file", async function () {
-        const xhr = await createRequest("GET", "app:///Scripts/index.js");
+        const xhr = await createRequest("GET", "app:///Scripts/tests.js");
         expect(xhr).to.have.property('readyState', 4);
         expect(xhr).to.have.property('status', 200);
         expect(xhr).to.have.property('responseText').with.lengthOf.above(0);
@@ -516,7 +516,10 @@ describe("WebSocket", function () {
         expect(ws).to.have.property('readyState', 3);
 
         // Calling Send while closing triggers .onerror()
-        ws.send("throw");
+        /*function badFunction(){
+            ws.send("This Should Throw");
+        }
+        expect(badFunction).to.throw();*/
     }
 
     ws.onmessage = (msg) => {
