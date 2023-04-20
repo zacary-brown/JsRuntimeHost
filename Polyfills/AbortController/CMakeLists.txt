@@ -1,3 +1,4 @@
+    set(SOURCES
     ${SOURCES}
     "Include/Babylon/Polyfills/AbortController.h"
     "Source/AbortController.cpp"

@@ -47,7 +47,6 @@ int RunTests(Babylon::Polyfills::Console::CallbackT consoleCallback)
         Babylon::Polyfills::Scheduling::Initialize(env);
         Babylon::Polyfills::URL::Initialize(env);
         Babylon::Polyfills::AbortController::Initialize(env);
-        Babylon::Polyfills::URLSearchParams::Initialize(env);
         Babylon::Polyfills::WebSocket::Initialize(env);
         Babylon::Polyfills::XMLHttpRequest::Initialize(env);
 
